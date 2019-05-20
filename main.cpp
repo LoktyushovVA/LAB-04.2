@@ -70,3 +70,7 @@ int main()
      FILE* file = fopen( namefile, "r" );
     fseek( file, 0, SEEK_END );
     long filesize = ftell( file );
+
+    char* filedata = new char[filesize];
+    rewind( file );
+    fread( filedata, 1, filesize, file );
