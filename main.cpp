@@ -6,11 +6,10 @@ using namespace std;
 const size_t MAX_SIZE = 256;
 const char* separators = " \r\n,.!?:;()-";
 const char* forbidden =  "*<>?|\"";
-
+const size_t MAX_EXTENSION = 3;
 int main ()
 {
-int main()
-{
+
     char text[MAX_SIZE];
     cout << "Enter file name: ";
     fgets(text, MAX_SIZE, stdin);
@@ -67,10 +66,31 @@ int main()
         break;
     }
 
-     FILE* file = fopen( namefile, "r" );
+    cout << namefile << "\n" << strstr( "text text apple", "apple" );
+
+    FILE* file = fopen(namefile, "r" );
     fseek( file, 0, SEEK_END );
     long filesize = ftell( file );
 
     char* filedata = new char[filesize];
-    rewind( file );
+    rewind( file );                                // îøèáêà â ýòîì áëîêå
     fread( filedata, 1, filesize, file );
+
+    char line[MAX_SIZE];
+    cout << "Enter string: ";
+    fgets(line, MAX_SIZE, stdin);
+    const char* str = line;
+    while(true)
+    {
+        if( strstr( filedata, str ) != nullptr )
+            cout << strstr( filedata, str );
+        else
+        {
+            cout << "NULL";
+            break;
+        }
+    }
+    fclose( file );
+    delete[] filedata;
+    return 0;
+}
